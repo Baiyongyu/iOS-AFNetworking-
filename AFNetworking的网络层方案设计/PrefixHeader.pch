@@ -1,0 +1,35 @@
+//
+//  PrefixHeader.pch
+//  AFNetworking的网络层方案设计
+//
+//  Created by 宇玄丶 on 2017/3/17.
+//  Copyright © 2017年 北京116工作室. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+//----------------------------------- Macro ------------------------------------
+#import "AppMacro.h"
+#import "StringMacro.h"
+#import "ServerMacro.h"
+
+//----------------------------------- ThirdLib ------------------------------------
+//#import "MJRefresh.h"
+#import "MBProgressHUD.h"
+#import "AFNetworking.h"
+#import "YYModel.h"
+
+
+#import "AppDelegate.h"
+#import "AppCommon.h"
+
+#import "UserModel.h"
+#import "UserManager.h"
+
+
+#import "NSObject+Additions.h"
+#import "UIView+Additions.h"
+#import "MBProgressHUD+Additions.h"
+#endif /* PrefixHeader_pch */
