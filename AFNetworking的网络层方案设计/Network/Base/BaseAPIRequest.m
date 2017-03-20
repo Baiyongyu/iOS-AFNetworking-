@@ -70,7 +70,7 @@
     [self cancelAllRequests];
     if (view) {
         self.hudSuperView = view;
-//        [MBProgressHUD showLoadingHUD:HUDMsg onView:self.hudSuperView];
+        [MBProgressHUD showLoadingHUD:HUDMsg onView:self.hudSuperView];
     }
     NSDictionary *params = [self.paramSource paramsForApi:self];
     if ([self.child respondsToSelector:@selector(reformParamsForApi:)]) {
@@ -113,7 +113,7 @@
 - (void)successedOnCallingAPI:(BaseAPIResponse *)response
 {
     if (self.hudSuperView) {
-//        [MBProgressHUD hideLoadingHUD];
+        [MBProgressHUD hideLoadingHUD];
     }
     [self removeRequestIdWithRequestID:response.requestId];
     
