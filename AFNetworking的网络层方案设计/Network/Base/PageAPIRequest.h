@@ -41,6 +41,6 @@
 /**
  *  每页多少条数据，默认20
  */
-- (NSUInteger)pageSize;
+@property(nonatomic,assign)NSInteger pageSize;
 
 @end

@@ -14,6 +14,7 @@
     self = [super init];
     if (self) {
         self.currentPage = 1;
+        self.pageSize = 20;
     }
     return self;
 }
@@ -22,22 +23,20 @@
     self = [super initWithDelegate:delegate paramSource:paramSource];
     if (self) {
         self.currentPage = 1;
+        self.pageSize = 20;
     }
     return self;
 }
 
-- (NSUInteger)pageSize {
-    return 10;
-}
+//- (NSUInteger)pageSize {
+//    return 10;
+//}
 
 - (NSDictionary *)reformParamsForApi:(NSDictionary *)params
 {
     NSMutableDictionary *newParmas = params?[params mutableCopy]:[NSMutableDictionary dictionary];
     [newParmas setObject:[NSNumber numberWithInteger:self.currentPage] forKey:@"page"];
     [newParmas setObject:[NSNumber numberWithInteger:[self pageSize]] forKey:@"pageSize"];
-    [newParmas setObject:[NSNumber numberWithInteger:[self pageSize]] forKey:@"limit"];
-    [newParmas setObject:[NSNumber numberWithInteger:[self pageSize]] forKey:@"page_step"];
-    [newParmas setObject:[NSNumber numberWithInteger:[self pageSize]*(self.currentPage-1)] forKey:@"page_start"];
     return newParmas;
 }
 

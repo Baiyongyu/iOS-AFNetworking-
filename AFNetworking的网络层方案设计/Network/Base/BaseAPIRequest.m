@@ -88,7 +88,7 @@
         if ([self.child respondsToSelector:@selector(requestSerializer)]) {
             [BaseAPIProxy sharedInstance].requestSerializer = self.child.requestSerializer;
         } else {
-            [BaseAPIProxy sharedInstance].requestSerializer = [AFHTTPRequestSerializer serializer]; // 拼接，如果是JSON换成AFJSON
+            [BaseAPIProxy sharedInstance].requestSerializer = [AFHTTPRequestSerializer serializer]; // 拼接，如果是JSON换成AFJSONRequestSerializer
         }
         if ([self.child respondsToSelector:@selector(responseSerializer)]) {
             [BaseAPIProxy sharedInstance].responseSerializer = self.child.responseSerializer;
@@ -172,17 +172,19 @@
             break;
     }
     if (self.errorType==APIManagerErrorLoginTimeout) {
+        if (![UserManager isLogedin]) {
+            [UserManager removeLocalUserLoginInfo];
+            return;
+        }
         if (!self.reloginCount && ![self isKindOfClass:[LoginRequest class]]) {
             self.reloginCount++;
             [LoginRequest autoReloginSuccess:^{
                 [self loadDataWithHUDOnView:self.hudSuperView];
             } failure:^{
                 [UserManager removeLocalUserLoginInfo];
-                [kAppDelegate loadLoginVC];
             }];
         } else {
             [UserManager removeLocalUserLoginInfo];
-            [kAppDelegate loadLoginVC];
         }
     } else {
         [self.delegate managerCallAPIDidFailed:self];
@@ -190,15 +192,11 @@
             [MBProgressHUD showMsgHUD:response.msg];
         }
     }
-    
-    if (self.responseData.errcode==11010) {
-        [LoginRequest autoReloginSuccess:^{
-            [self loadDataWithHUDOnView:self.hudSuperView];
-        } failure:^{
-            [UserManager removeLocalUserLoginInfo];
-            [kAppDelegate loadLoginVC];
-        }];
-    }
+}
+
+- (void)updateCookie
+{
+    [[BaseAPIProxy sharedInstance] updateCookie];
 }
 
 #pragma mark - private methods

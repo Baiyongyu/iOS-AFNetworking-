@@ -1,16 +1,16 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9D47363B6C36FB335E050235452180AB7C3C3480",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "7A110A2C8779BDA08360C4F9CAD1EA9040076E42",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "760E7646FF79615C99BCE2413C3B078F688839ED" : 9223372036854775807,
-    "9D47363B6C36FB335E050235452180AB7C3C3480" : 9223372036854775807
+    "7A110A2C8779BDA08360C4F9CAD1EA9040076E42" : 9223372036854775807,
+    "760E7646FF79615C99BCE2413C3B078F688839ED" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C65BA64F-C734-4194-A8F2-31E476813E68",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "760E7646FF79615C99BCE2413C3B078F688839ED" : "",
-    "9D47363B6C36FB335E050235452180AB7C3C3480" : "AFNetworking%E7%9A%84%E7%BD%91%E7%BB%9C%E5%B1%82%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1\/"
+    "7A110A2C8779BDA08360C4F9CAD1EA9040076E42" : "AFNetworking%E7%9A%84%E7%BD%91%E7%BB%9C%E5%B1%82%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1\/",
+    "760E7646FF79615C99BCE2413C3B078F688839ED" : ""
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "AFNetworking的网络层方案设计",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -24,7 +24,7 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Baiyongyu\/iOS-AFNetworking-.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9D47363B6C36FB335E050235452180AB7C3C3480"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7A110A2C8779BDA08360C4F9CAD1EA9040076E42"
     }
   ]
 }

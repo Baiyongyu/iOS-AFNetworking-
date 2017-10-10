@@ -29,6 +29,15 @@
     return sharedInstance;
 }
 
+-(instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self setCookie];
+    }
+    return self;
+}
+
 - (NSInteger)callAPIWithRequestType:(APIManagerRequestType)requestType params:(NSDictionary *)params requestPath:(NSString *)requestPath uploadBlock:(void (^)(id <AFMultipartFormData> formData))uploadBlock success:(APICallback)success fail:(APICallback)fail
 {
     NSString *urlString = [NSString stringWithFormat:@"%@%@",BaseUrl,requestPath];
@@ -56,7 +65,7 @@
     NSNumber *requestId = [self generateRequestId];
     
     self.sessionManager.requestSerializer = self.requestSerializer;
-    self.sessionManager.requestSerializer.timeoutInterval = 10;
+    self.sessionManager.requestSerializer.timeoutInterval = 20;
     self.sessionManager.responseSerializer = self.responseSerializer;
     [self setCookie];
     // 跑到这里的block的时候，就已经是主线程了。
@@ -119,12 +128,6 @@
 
 - (void)handelSuccessRequst:(NSNumber *)requestId task:(NSURLSessionDataTask *)task responseObject:(id)responseObject success:(APICallback)success
 {
-    NSData *cookiesData = [NSKeyedArchiver archivedDataWithRootObject:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
-    //存储归档后的cookie
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:cookiesData forKey:kCookie];
-    [self setCookie];
-    
     NSURLSessionDataTask *storedTask = self.dispatchTable[requestId];
     if (storedTask == nil) {
         // 如果这个task是被cancel的，那就不用处理回调了。
@@ -167,18 +170,34 @@
     return _recordedRequestId;
 }
 
+- (void)updateCookie
+{
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    NSData *cookiesData = [NSKeyedArchiver archivedDataWithRootObject:cookies];
+    //存储归档后的cookie
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults removeObjectForKey:kCookie];
+    [userDefaults setObject:cookiesData forKey:kCookie];
+    [userDefaults synchronize];
+    [self setCookie];
+}
+
 - (void)setCookie
 {
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray *cookies = cookieStorage.cookies;
+    for (NSHTTPCookie *cookie in cookies) {
+        [cookieStorage deleteCookie:cookie];
+    }
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if (![userDefaults objectForKey:kCookie]) {
         return;
     }
     //对取出的cookie进行反归档处理
-    NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:[userDefaults objectForKey:kCookie]];
+    NSArray *localCookies = [NSKeyedUnarchiver unarchiveObjectWithData:[userDefaults objectForKey:kCookie]];
     
-    if (cookies) {
+    if (localCookies) {
         //设置cookie
-        NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         for (id cookie in cookies) {
             [cookieStorage setCookie:(NSHTTPCookie *)cookie];
         }

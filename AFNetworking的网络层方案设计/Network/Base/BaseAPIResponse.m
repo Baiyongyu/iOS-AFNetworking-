@@ -32,6 +32,7 @@
     if (self) {
         self.httpStatusCode = urlResponse.statusCode;
         self.msg = [self handelError:error];
+        DLog(@"%ld",self.httpStatusCode);
         if (self.httpStatusCode==11010) {
             self.errorType = APIManagerErrorLoginTimeout;
         }

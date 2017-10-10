@@ -30,5 +30,6 @@ typedef void(^APICallback)(BaseAPIResponse *response);
 
 - (void)cancelRequestWithRequestID:(NSNumber *)requestID;
 - (void)cancelRequestWithRequestIDList:(NSArray *)requestIDList;
+- (void)updateCookie;
 
 @end

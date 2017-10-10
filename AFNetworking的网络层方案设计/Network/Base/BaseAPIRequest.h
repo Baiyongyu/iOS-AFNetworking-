@@ -56,6 +56,7 @@
 @property (nonatomic, assign, readonly)APIManagerErrorType errorType;
 @property (nonatomic, copy) NSString *msg;
 @property (nonatomic, assign) BOOL disableErrorTip;
+- (void)updateCookie;
 -(instancetype)initWithDelegate:(id)delegate paramSource:(id)paramSource;
 - (NSInteger)loadDataWithHUDOnView:(UIView *)view;
 - (NSInteger)loadDataWithHUDOnView:(UIView *)view HUDMsg:(NSString *)HUDMsg;

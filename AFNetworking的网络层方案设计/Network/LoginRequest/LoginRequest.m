@@ -27,9 +27,24 @@
     return [LoginResponse class];
 }
 
+- (void)reformData {
+    [self updateCookie];
+}
+
+- (NSInteger)loadDataWithHUDOnView:(UIView *)view {
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in cookieStorage.cookies) {
+        [cookieStorage deleteCookie:cookie];
+    }
+    return [super loadDataWithHUDOnView:view];
+}
+
 #pragma mark - public
 + (void)autoReloginSuccess:(void(^)())success failure:(void(^)())failure {
-    
+    if (![UserManager isLogedin]) {
+        return;
+    }
+    DLog(@"%@-%@",userManager.userData.username, userManager.password);
     LoginRequest *loginRequest = [[LoginRequest alloc] init];
     loginRequest.paramSource = (id)loginRequest;
     loginRequest.delegate = (id)loginRequest;

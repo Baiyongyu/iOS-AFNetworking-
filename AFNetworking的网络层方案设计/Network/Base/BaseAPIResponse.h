@@ -41,5 +41,4 @@ typedef NS_ENUM (NSUInteger, APIManagerErrorType){
 @property(nonatomic,copy)NSArray *list;
 @property(nonatomic,copy)NSNumber *totalPage;
 @property(nonatomic,copy)NSNumber *totalRow;
-@property(nonatomic,copy)NSNumber *total_count;
 @end
